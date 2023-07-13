@@ -42,6 +42,9 @@ news.setNews(data.value)
   gap: 20px;
   &--small {
     grid-template-columns: 1fr 1fr;
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 

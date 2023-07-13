@@ -14,9 +14,14 @@ defineProps<{ item: newsItem }>()
   height: 100px;
   flex-shrink: 0;
   flex-grow: 0;
-  border-radius: 6px;
+  @media (max-width: $tablet) {
+    width: 100%;
+    height: min(40vw, 200px);
+  }
 }
 .card__image {
+  border-radius: 6px;
+
   display: block;
   width: 100%;
   height: 100%;

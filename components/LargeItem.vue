@@ -18,5 +18,9 @@ defineProps<{ item: newsItem }>()
   align-items: flex-start;
   justify-content: flex-start;
   gap: 30px;
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

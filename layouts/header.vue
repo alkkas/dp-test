@@ -29,6 +29,9 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 37px;
+    @media (max-width: $tablet) {
+      display: block;
+    }
   }
 }
 
@@ -36,5 +39,9 @@
   display: flex;
   align-items: center;
   gap: 47px;
+  @media (max-width: $tablet) {
+    justify-content: space-between;
+    margin-bottom: 23px;
+  }
 }
 </style>

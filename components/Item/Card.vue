@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import type { newsItem } from 'types/global'
+import type { newsItem } from '~/types/global'
+import { formatDate } from '~/utils/formatDate'
 defineProps<{ item: newsItem }>()
 </script>
 
@@ -8,7 +9,7 @@ defineProps<{ item: newsItem }>()
     <slot />
     <footer class="card__footer">
       <p>{{ item?.source }}</p>
-      <p>{{ item?.date_published }}</p>
+      <p>{{ formatDate(item?.date_published) }}</p>
     </footer>
   </div>
 </template>
@@ -22,6 +23,9 @@ defineProps<{ item: newsItem }>()
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  @media (max-width: $tablet) {
+    display: block;
+  }
   &__footer {
     display: flex;
     justify-content: space-between;

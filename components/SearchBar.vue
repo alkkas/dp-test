@@ -34,6 +34,9 @@ const changeValue = (newValue: string) => {
     width: 320px;
     height: 40px;
     position: relative;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
   }
   &-icon {
     position: absolute;
