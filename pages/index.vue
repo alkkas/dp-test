@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import useNewsStore from '~/store/store'
 const newsStore = useNewsStore()
-const { data } = await useFetch('/api/news')
-console.log(data.value)
+const { data } = await useFetch<[]>('/api/news')
 </script>
 
 <template>
@@ -15,7 +14,7 @@ console.log(data.value)
     </section>
     <div class="pagination">
       <vue-awesome-paginate
-        :total-items="200"
+        :total-items="data?.length"
         :items-per-page="4"
         :max-pages-shown="4"
         :hide-prev-next="true"
