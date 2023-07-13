@@ -11,9 +11,12 @@ news.setNews(data.value)
 <template>
   <main style="margin-top: 26px">
     <Filters />
-
+    <Loader v-if="news.itemType === null" style="margin: 40px auto" />
+    <section v-else-if="news.newsToShow.length === 0">
+      <h2 class="empty">Пусто (</h2>
+    </section>
     <section
-      v-if="news.itemType === 'small'"
+      v-else-if="news.itemType === 'small'"
       :class="['items', news.itemType === 'small' ? 'items--small' : '']"
     >
       <SmallItem v-for="item in news.newsToShow" :item="item" />
@@ -22,7 +25,10 @@ news.setNews(data.value)
       <LargeItem v-for="item in news.newsToShow" :item="item" />
     </section>
 
-    <div class="pagination">
+    <div
+      class="pagination"
+      v-if="news.newsToShow.length !== 0 && news.itemType !== null"
+    >
       <vue-awesome-paginate
         :total-items="news.filteredNews.length"
         :items-per-page="news.perPage"
@@ -52,5 +58,10 @@ news.setNews(data.value)
   display: grid;
   align-items: center;
   justify-items: center;
+}
+
+.empty {
+  text-align: center;
+  margin-top: 30px;
 }
 </style>
