@@ -1,24 +1,34 @@
 <script setup lang="ts">
 import useNewsStore from '~/store/store'
-const newsStore = useNewsStore()
-const { data } = await useFetch<[]>('/api/news')
+import type { newsItem } from '~/types/global'
+
+const { data } = await useFetch<newsItem[]>('/api/news')
+
+const news = useNewsStore()
+news.setNews(data.value)
 </script>
 
 <template>
   <main style="margin-top: 26px">
     <Filters />
 
-    <section class="items">
-      <ShortItem />
-      <LongItem />
+    <section
+      v-if="news.itemType === 'small'"
+      :class="['items', news.itemType === 'small' ? 'items--small' : '']"
+    >
+      <SmallItem v-for="item in news.newsToShow" :item="item" />
     </section>
+    <section v-else-if="news.itemType === 'large'" class="items">
+      <LargeItem v-for="item in news.newsToShow" :item="item" />
+    </section>
+
     <div class="pagination">
       <vue-awesome-paginate
-        :total-items="data?.length"
-        :items-per-page="4"
+        :total-items="news.filteredNews.length"
+        :items-per-page="news.perPage"
         :max-pages-shown="4"
         :hide-prev-next="true"
-        v-model="newsStore.$state.page"
+        v-model="news.page"
         class="pagination"
       />
     </div>
@@ -30,7 +40,11 @@ const { data } = await useFetch<[]>('/api/news')
   margin: 25px 0 50px;
   display: grid;
   gap: 20px;
+  &--small {
+    grid-template-columns: 1fr 1fr;
+  }
 }
+
 .pagination {
   display: grid;
   align-items: center;

@@ -1,10 +1,20 @@
+<script setup lang="ts">
+import useNewsStore from '~/store/store'
+
+const router = useRouter()
+const news = useNewsStore()
+
+const reset = () => {
+  news.resetFilters()
+  router.push('/')
+}
+</script>
+
 <template>
-  <button class="reset-icon-container">
+  <button class="reset-icon-container" @click="reset">
     <Icon svgName="reset" :width="20" />
   </button>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .reset-icon-container {

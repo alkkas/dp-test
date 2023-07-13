@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-
 const props = defineProps<{
   svgName: string
   width: number
@@ -20,7 +18,9 @@ const Icon = defineAsyncComponent(
   >
     <Icon
       class="svg-icon"
-      :style="{ height: height ? height + 'px' : 'auto' }"
+      :style="{
+        height: height ? height + 'px' : 'auto',
+      }"
     />
   </div>
 </template>
@@ -31,6 +31,7 @@ const Icon = defineAsyncComponent(
   align-items: center;
   justify-items: center;
 }
+
 .svg-icon {
   width: 100%;
   margin: 0;

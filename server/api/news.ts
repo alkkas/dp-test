@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
       ...item,
       imgUrl: misc[1],
       desc: misc[2],
+      source: '3dnews.ru',
     }
   })
 
@@ -20,14 +21,16 @@ export default defineEventHandler(async (event) => {
       const desc = misc[0].split(/<p>([^\<]*?)<\/p>/)
       return {
         ...item,
-        desc: desc[1],
+        desc: item.summary,
         imgUrl: '',
+        source: 'habr.com',
       }
     } else {
       return {
         ...item,
         desc: misc[2],
         imgUrl: misc[1],
+        source: 'habr.com',
       }
     }
   })

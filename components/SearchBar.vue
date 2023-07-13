@@ -1,11 +1,32 @@
+<script setup lang="ts">
+import useNewsStore from '~/store/store'
+import { debounce } from '~/utils/debounce'
+
+const router = useRouter()
+const route = useRoute()
+const news = useNewsStore()
+
+const changeSearchParam = debounce((query: string) => {
+  router.push({ path: '/', query: { ...route.query, searchQuery: query } })
+  news.page = 1
+})
+
+const changeValue = (newValue: string) => {
+  news.filters.searchQuery = newValue
+  changeSearchParam(newValue)
+}
+</script>
+
 <template>
   <div class="search-bar-container">
-    <input class="search-bar" />
+    <input
+      class="search-bar"
+      :value="news.filters.searchQuery"
+      @input="(e) => changeValue((e.target as HTMLButtonElement).value)"
+    />
     <Icon svgName="search" :width="20" className="search-bar-icon" />
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .search-bar {
